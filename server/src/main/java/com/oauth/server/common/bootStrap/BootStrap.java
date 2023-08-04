@@ -27,8 +27,9 @@ public class BootStrap {
         admin.setUsername("admin");
         String adminPass = passwordEncoder.encode("admin");
         admin.setPassword(adminPass);
-
+        admin.setPhoneNumber("09166761607");
         userRepository.save(admin);
+
         Role adminRole = new Role();
         adminRole.setName("ROLE_ADMIN");
         adminRole.setUser(admin);

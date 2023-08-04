@@ -28,20 +28,34 @@ public class AuthenticationController {
 
     @PostMapping("signUp")
     public ResponseEntity<AuthenticationResponse> signUp(@RequestBody SignUpDto req) {
-        User user = mapper.map(req, User.class);
+        var user = mapper.map(req, User.class);
         AuthenticationResponse response = userService.signUp(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PostMapping("signIn")
     public ResponseEntity<AuthenticationResponse> signIn(@RequestBody SignInDto req) {
-        AuthenticationResponse response = userService.signIn(req);
+        var response = userService.signIn(req);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PostMapping("otp/send")
+    public ResponseEntity<String> sendOtp(@RequestParam("phoneNumber") String phoneNumber){
+        var otpCode = userService.sendOtp(phoneNumber);
+        return new ResponseEntity<>(otpCode,HttpStatus.OK);
+    }
+
+    @PostMapping("otp/verify")
+    public ResponseEntity<AuthenticationResponse> verifyOtp(
+            @RequestParam("phoneNumber") String phoneNumber,
+            @RequestParam("otpCode") String otpCode){
+        var response = userService.signIn(phoneNumber,otpCode);
+        return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
 
     @PostMapping("token/refresh")
     public ResponseEntity<AuthenticationResponse> refreshToken(HttpServletRequest request){
-        String authHeader = request.getHeader("Authorization");
+        var authHeader = request.getHeader("Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             throw new AuthException("missing refresh token");
         }
