@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 
 import java.net.PortUnreachableException;
 import java.security.Key;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
 import java.util.*;
 import java.util.function.Function;
 
@@ -92,6 +94,7 @@ public class JwtService {
     private Algorithm getSigningAlgorithm() {
         return Algorithm.HMAC512(SECRET_KEY.getBytes());
     }
+
 
 //    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
 //        Claims claims = extractAllClaims(token);
