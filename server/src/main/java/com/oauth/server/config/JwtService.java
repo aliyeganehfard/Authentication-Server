@@ -8,11 +8,12 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.oauth.server.common.dto.AuthenticationResponse;
 import com.oauth.server.common.exception.AuthException;
+import com.oauth.server.common.utils.PrivateKeyReader;
+import com.oauth.server.common.utils.PublicKeyReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.*;
@@ -30,17 +31,14 @@ public class JwtService {
     public RSAPrivateKey privateKey;
     public RSAPublicKey publicKey;
 
+
     @Autowired
     public void init() {
         try {
-            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048);
-            KeyPair keyPair = keyPairGenerator.generateKeyPair();
-
-            this.privateKey = (RSAPrivateKey) keyPair.getPrivate();
-            this.publicKey = (RSAPublicKey) keyPair.getPublic();
-        } catch (NoSuchAlgorithmException e) {
-            throw new AuthException("generate key pair exception");
+            privateKey = PrivateKeyReader.getPrivateKey("sign_key.pem");
+            publicKey = PublicKeyReader.getPublicKey("verify_key.pem");
+        } catch (Exception e) {
+           throw new AuthException("problem with read RSA file");
         }
     }
 

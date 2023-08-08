@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.Key;
@@ -8,6 +9,8 @@ import java.security.NoSuchProviderException;
 import java.security.Security;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.util.Arrays;
+
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 public class Main {
@@ -21,8 +24,9 @@ public class Main {
         RSAPrivateKey priv = (RSAPrivateKey) keyPair.getPrivate();
         RSAPublicKey pub = (RSAPublicKey) keyPair.getPublic();
 
-        writePemFile(priv, "RSA PRIVATE KEY", "sign_key");
+        writePemFile(priv, "RSA PRIVATE KEY", "sign_key.pem");
         writePemFile(pub, "RSA PUBLIC KEY", "verify_key.pem");
+
     }
 
     private static KeyPair generateRSAKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException {
@@ -33,8 +37,8 @@ public class Main {
 
     private static void writePemFile(Key key, String description, String filename)
             throws FileNotFoundException, IOException {
-        PemFile pemFile = new PemFile(key, description);
-        pemFile.write(filename);
+        PemFileWriter pemFileWriter = new PemFileWriter(key, description);
+        pemFileWriter.write(filename);
 
     }
 
