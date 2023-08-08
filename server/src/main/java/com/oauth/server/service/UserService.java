@@ -14,7 +14,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.oauth.server.config.JwtService.CLAIM_ROLES;
@@ -88,7 +90,11 @@ public class UserService {
     }
 
     private AuthenticationResponse getAuthenticationResponse(User user) {
-        List<String> collect = user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
-        return jwtService.getToken(CLAIM_ROLES, collect, user);
+//        List<String> collect = user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+//        return jwtService.getToken(CLAIM_ROLES, collect, user);
+        List<String> roles = user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+        Map<String,List<String>> payload = new HashMap<>();
+        payload.put(CLAIM_ROLES, roles);
+        return jwtService.getToken(payload, user);
     }
 }
