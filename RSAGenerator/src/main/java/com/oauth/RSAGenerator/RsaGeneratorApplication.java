@@ -20,7 +20,7 @@ import java.security.interfaces.RSAPublicKey;
 public class RsaGeneratorApplication implements CommandLineRunner {
 
     public static final int KEY_SIZE = 2048;
-    public static final String RESOURCES_URI = "F:\\Java-programming\\Self Project\\Authentication-Server\\GenerateRSAKeys\\src\\main\\resources\\";
+    public static final String RESOURCES_URI = "F:\\Java-programming\\Self Project\\Authentication-Server\\RSAGenerator\\src\\main\\resources\\";
 
     public static void main(String[] args) {
         SpringApplication.run(RsaGeneratorApplication.class, args);
@@ -42,7 +42,7 @@ public class RsaGeneratorApplication implements CommandLineRunner {
         return RESOURCES_URI + name;
     }
 
-    private static KeyPair generateRSAKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException {
+    private static KeyPair generateRSAKeyPair() throws NoSuchAlgorithmException {
         KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
         generator.initialize(KEY_SIZE);
         return generator.generateKeyPair();
