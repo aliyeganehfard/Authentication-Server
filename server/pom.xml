@@ -54,6 +54,7 @@
             <artifactId>common-utils</artifactId>
             <version>1.0.0</version>
         </dependency>
+
         <!-- JWT -->
         <dependency>
             <groupId>com.auth0</groupId>

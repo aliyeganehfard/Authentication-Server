@@ -8,7 +8,7 @@
 		<version>3.1.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.auth</groupId>
+	<groupId>com.oauth</groupId>
 	<artifactId>client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>client</name>
@@ -42,12 +42,13 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- JWT -->
+		<!-- common utils -->
 		<dependency>
-			<groupId>com.auth0</groupId>
-			<artifactId>java-jwt</artifactId>
-			<version>4.4.0</version>
+			<groupId>com.oauth</groupId>
+			<artifactId>common-utils</artifactId>
+			<version>1.0.0</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>
