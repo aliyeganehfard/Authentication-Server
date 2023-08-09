@@ -90,8 +90,6 @@ public class UserService {
     }
 
     private AuthenticationResponse getAuthenticationResponse(User user) {
-//        List<String> collect = user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
-//        return jwtService.getToken(CLAIM_ROLES, collect, user);
         List<String> roles = user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
         Map<String,List<String>> payload = new HashMap<>();
         payload.put(CLAIM_ROLES, roles);

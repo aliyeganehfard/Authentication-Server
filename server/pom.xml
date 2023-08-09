@@ -48,6 +48,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- common utils -->
+        <dependency>
+            <groupId>com.oauth</groupId>
+            <artifactId>common-utils</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <!-- JWT -->
         <dependency>
             <groupId>com.auth0</groupId>

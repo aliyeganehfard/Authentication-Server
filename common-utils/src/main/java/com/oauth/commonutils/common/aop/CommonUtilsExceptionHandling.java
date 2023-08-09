@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class ExceptionHandling {
+public class CommonUtilsExceptionHandling {
 
     @ExceptionHandler(CommonUtilsException.class)
     public ResponseEntity<String> handleAuthException(CommonUtilsException commonUtilsException){

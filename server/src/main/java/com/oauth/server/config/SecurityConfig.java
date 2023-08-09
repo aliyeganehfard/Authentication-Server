@@ -1,7 +1,7 @@
 package com.oauth.server.config;
 
+import com.oauth.commonutils.filter.JwtAuthenticationFilter;
 import com.oauth.server.database.repository.UserRepository;
-import com.oauth.server.filter.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

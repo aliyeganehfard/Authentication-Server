@@ -16,16 +16,20 @@ public class JWTVerificationProvider {
 
 
     public static final String CLAIM_ROLES = "roles";
-    public RSAPublicKey publicKey;
+    private RSAPublicKey publicKey;
 
 
     @Autowired
     public void init() {
         try {
-            publicKey = PublicKeyReader.getPublicKey("verify_key.pem");
+            publicKey = PublicKeyReader.getPublicKey("verify_key.pub");
         } catch (Exception e) {
            throw new CommonUtilsException("problem with read RSA file");
         }
+    }
+
+    public RSAPublicKey getPublicKey(){
+        return this.publicKey;
     }
 
     public DecodedJWT getDecodedJWT(String token) {
